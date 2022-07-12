@@ -5,9 +5,14 @@ using InnovecsProject.Model.System;
 
 namespace InnovecsProject.Business.Implements
 {
-    public class ServicesApiTwo : IDealServicesTwo
+    public class DealServicesTwo : IDealServicesTwo
     {
-        public async Task<ResponseDto<object>> GettDeal(FilterApiTwoDto filterRequest)
+        
+        public DealServicesTwo()
+        {
+        }
+
+        public async Task<ResponseDto<OutApiTwoDto>> GettDeal(FilterApiTwoDto filterRequest)
         {
             throw new System.NotImplementedException();
         }

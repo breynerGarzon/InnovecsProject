@@ -1,13 +1,13 @@
 using System.Threading.Tasks;
 using InnovecsProject.Business.Interface;
-using InnovecsProject.Model.Dto.ApiOne;
+using InnovecsProject.Model.Dto.ApiTwo;
 using InnovecsProject.Model.System;
 
 namespace InnovecsProject.Business.Implements
 {
-    public class ServicesApiOne : IDealServicesOne
+    public class DealServicesThree : IDealServicesThree
     {
-        public async Task<ResponseDto<object>> GettDeal(FilterApiOneDto filterRequest)
+        public async Task<ResponseDto<OutApiThreeDto>> GettDeal(string filterRequest)
         {
             throw new System.NotImplementedException();
         }

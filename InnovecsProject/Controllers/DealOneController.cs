@@ -18,7 +18,7 @@ namespace InnovecsProject.Api.Controllers
         }
 
         [HttpGet]
-        [Route("")]
+        [Route("ApiOne")]
         public async Task<IActionResult> BestDeal([FromQuery] FilterApiOneDto filterRequest)
         {
             return Ok(await this.servicesDeal.GettDeal(filterRequest));

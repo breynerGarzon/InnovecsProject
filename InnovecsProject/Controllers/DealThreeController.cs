@@ -1,4 +1,5 @@
 using System.Threading.Tasks;
+using InnovecsProject.Business.Interface;
 using Microsoft.AspNetCore.Mvc;
 
 namespace InnovecsProject.Api.Controllers
@@ -7,16 +8,18 @@ namespace InnovecsProject.Api.Controllers
     [Route("api/[controller]")]
     public class DealThreeController : ControllerBase
     {
-        public DealThreeController()
-        {
+        private readonly IDealServicesThree dealServicesThree;
 
+        public DealThreeController(IDealServicesThree dealServicesThree)
+        {
+            this.dealServicesThree = dealServicesThree;
         }
 
         [HttpGet]
-        [Route("")]
-        public async Task<IActionResult> BestDeal()
+        [Route("ApiThree")]
+        public async Task<IActionResult> BestDeal(string filterRequest)
         {
-            return Ok();
+            return Ok(await this.dealServicesThree.GettDeal(filterRequest));
         }
     }
 }

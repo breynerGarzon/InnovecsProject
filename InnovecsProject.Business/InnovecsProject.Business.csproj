@@ -8,5 +8,11 @@
     <ProjectReference Include="..\InnovecsProject.Model\InnovecsProject.Model.csproj" />
     <ProjectReference Include="..\InnovecsProject.Repository\InnovecsProject.Repository.csproj" />
   </ItemGroup>
-
+  
+  <ItemGroup>  
+    <PackageReference Include="Microsoft.Extensions.Http" Version="3.1.0" />  
+    <PackageReference Include="Microsoft.Extensions.Options" Version="3.1.0" />  
+    <PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="3.1.0" />  
+    <PackageReference Include="System.Text.Json" Version="3.1.0" />
+  </ItemGroup>
 </Project>

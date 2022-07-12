@@ -1,11 +1,12 @@
 using System.Threading.Tasks;
+using InnovecsProject.Model.Dto.ApiThree;
 using InnovecsProject.Model.Dto.ApiTwo;
 using InnovecsProject.Model.System;
 
 namespace InnovecsProject.Business.Interface
 {
-    public interface IDealServicesTwo
+    public interface IDealServicesThree
     {
-        Task<ResponseDto<OutApiTwoDto>> GettDeal(FilterApiTwoDto filterRequest);
+        Task<ResponseDto<OutApiThreeDto>> GettDeal(string filterRequest);
     }
 }
