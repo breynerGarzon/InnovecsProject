@@ -1,7 +1,6 @@
 using System.Threading.Tasks;
 using InnovecsProject.Business.Interface;
 using InnovecsProject.Model.Dto.ApiOne;
-using InnovecsProject.Model.Dto.BestDeal;
 using InnovecsProject.Model.System;
 
 namespace InnovecsProject.Business.Implements
