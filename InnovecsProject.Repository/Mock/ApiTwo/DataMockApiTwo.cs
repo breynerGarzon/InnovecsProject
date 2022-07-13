@@ -13,15 +13,6 @@ namespace InnovecsProject.Repository.Mock.ApiTwo
                 prices.Add(new DimensionPriceDto() { High = iteration, Width = iteration, Length = iteration, Price = iteration * 5, Distance = iteration });
             }
             return prices;
-
-            // {
-
-            //     new DimensionPriceDto() { High = 10, Width = 15, Length = 15, Price = 16, Distance = 10 },
-            //     new DimensionPriceDto() { High = 10, Width = 20, Length = 20, Price = 17, Distance = 10 },
-            //     new DimensionPriceDto() { High = 15, Width = 10, Length = 10, Price = 18, Distance = 15 },
-            //     new DimensionPriceDto() { High = 15, Width = 15, Length = 10, Price = 19, Distance = 15 },
-            //     new DimensionPriceDto() { High = 15, Width = 20, Length = 10, Price = 20, Distance = 15 }
-            // };
         }
     }
 }

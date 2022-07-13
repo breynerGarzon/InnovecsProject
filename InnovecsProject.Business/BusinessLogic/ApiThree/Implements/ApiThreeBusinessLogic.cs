@@ -18,10 +18,10 @@ namespace InnovecsProject.Business.BusinessLogic.ApiThree.Implements
             return distance.Next(1, 20);
         }
 
-        public int CalculateTotalPrice(FilterApiOneDto filterRequest, IEnumerable<DimensionPriceDto> prices)
+        public int CalculateTotalPrice(FilterApiThreeDto filterRequest, IEnumerable<DimensionPriceDto> prices)
         {
             int total = 0;
-            filterRequest.PackageDimensions.ToList().ForEach(package =>
+            filterRequest.Packages.ToList().ForEach(package =>
             {
                 var price = prices.FirstOrDefault(price => price.Volumen == package.Volumen);
                 if (Validation.IsNotNull(price))
@@ -30,14 +30,13 @@ namespace InnovecsProject.Business.BusinessLogic.ApiThree.Implements
             return total;
         }
 
-        public int CalculateTotalPrice(FilterApiThreeDto filterRequest, IEnumerable<DimensionPriceDto> prices)
-        {
-            throw new NotImplementedException();
-        }
-
         public FilterApiThreeDto DeserializeXml(string xmlStruct)
         {
-            return new FilterApiThreeDto();
+            XmlSerializer serializer = new XmlSerializer(typeof(FilterApiThreeDto));
+            using (StringReader reader = new StringReader(xmlStruct))
+            {
+                return (FilterApiThreeDto)(serializer.Deserialize(reader));
+            }
         }
     }
 }

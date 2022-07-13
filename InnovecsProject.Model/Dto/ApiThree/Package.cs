@@ -10,5 +10,6 @@ namespace InnovecsProject.Model.Dto.ApiThree
         public int Width { get; set; }
         [XmlAttribute("Length")]
         public int Length { get; set; }
+        public int Volumen { get { return High * Width * Length; } }
     }
 }
