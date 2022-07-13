@@ -30,7 +30,7 @@ namespace InnovecsProject.Business.Implements
 
             return Validation.IsNotZero(total) ?
                 ResponseServices.Successfull(new OutApiOneDto() { Total = total }) :
-                ResponseServices.BadRequest(Messages.ErrorWithDimentions);
+                ResponseServices.BadRequest<OutApiOneDto>(Messages.ErrorWithDimentions);
         }
     }
 }
