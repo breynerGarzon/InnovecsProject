@@ -1,4 +1,5 @@
 using Api.Extension;
+using InnovecsProject.Extension;
 using InnovecsProject.Model.System;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -24,6 +25,8 @@ namespace InnovecsProject
             services.Configure<DealApiDto>(configuracionesApp);
 
             services.ResolveDependencyLogicalBusiness();
+            services.ResolveDependencyRepository();
+            services.ResolveSwagger();
             services.AddControllers();
         }
 
@@ -34,6 +37,14 @@ namespace InnovecsProject
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            app.UseSwagger();
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Technical  Test");
+                c.RoutePrefix = string.Empty;
+            });
+
 
             app.UseHttpsRedirection();
 
