@@ -24,6 +24,7 @@ namespace InnovecsProject
             IConfigurationSection configuracionesApp = this.Configuration.GetSection("DealApi");
             services.Configure<DealApiDto>(configuracionesApp);
 
+            services.ResolveDependencyServicesLogicalBusiness();
             services.ResolveDependencyLogicalBusiness();
             services.ResolveDependencyRepository();
             services.ResolveSwagger();

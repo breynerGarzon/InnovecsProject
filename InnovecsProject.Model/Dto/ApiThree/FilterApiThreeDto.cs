@@ -5,11 +5,11 @@ namespace InnovecsProject.Model.Dto.ApiThree
 {
     public class FilterApiThreeDto
     {
-        [XmlAttribute("Source")]
+        [XmlAttribute("source")]
         public string Source { get; set; }
-        [XmlAttribute("Destination")]
+        [XmlAttribute("destination")]
         public string Destination { get; set; }
-        [XmlAttribute("Packages")]
-        public IEnumerable<Package> Packages { get; set; }
+        //[XmlAttribute("Packages")]
+        //public IEnumerable<Package> Packages { get; set; }
     }
 }

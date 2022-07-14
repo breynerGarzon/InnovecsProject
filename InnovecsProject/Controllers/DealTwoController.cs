@@ -16,9 +16,9 @@ namespace InnovecsProject.Api.Controllers
             this.servicesDeal = servicesDeal;
         }
 
-        [HttpGet]
+        [HttpPost]
         [Route("ApiTwo")]
-        public async Task<IActionResult> BestDeal([FromQuery] FilterApiTwoDto filterRequest)
+        public async Task<IActionResult> BestDeal([FromBody] FilterApiTwoDto filterRequest)
         {
             return Ok(await this.servicesDeal.GettDeal(filterRequest));
         }

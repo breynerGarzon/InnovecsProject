@@ -6,7 +6,7 @@ namespace Api.Extension
 {
     public static class ExtensionServicesLogicBusiness
     {
-        public static void ResolveDependencyLogicalBusiness(this IServiceCollection services)
+        public static void ResolveDependencyServicesLogicalBusiness(this IServiceCollection services)
         {
             services.AddTransient<IDealServicesOne, DealServicesOne>();
             services.AddTransient<IDealServicesTwo, DealServicesTwo>();

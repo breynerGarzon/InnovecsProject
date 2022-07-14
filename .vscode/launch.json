@@ -9,7 +9,7 @@
             "type": "coreclr",
             "request": "launch",
             "preLaunchTask": "build",
-            "program": "${workspaceFolder}/InnovecsProject/bin/Debug/netcoreapp3.1/Api.dll",
+            "program": "${workspaceFolder}/InnovecsProject/bin/Debug/netcoreapp3.1/InnovecsProject.Api.dll",
             "args": [],
             "cwd": "${workspaceFolder}/InnovecsProject",
             "stopAtEntry": false,

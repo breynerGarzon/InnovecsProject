@@ -9,6 +9,11 @@ namespace InnovecsProject.Model.Dto.ApiTwo
         public string Consignor { get; set; }
         public IEnumerable<CartonDto> Cartons { get; set; }
 
+        public FilterApiTwoDto()
+        {
+
+        }
+
         public FilterApiTwoDto(FilterBestDealDto filterRequest)
         {
 
