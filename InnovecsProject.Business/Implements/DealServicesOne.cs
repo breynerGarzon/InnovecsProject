@@ -22,7 +22,7 @@ namespace InnovecsProject.Business.Implements
             this.repositoryServices = repositoryServices;
         }
 
-        public async Task<ResponseDto<OutApiOneDto>> GettDeal(FilterApiOneDto filterRequest)
+        public async Task<ResponseDto<OutApiOneDto>> CalculatePrice(FilterApiOneDto filterRequest)
         {
             IEnumerable<DimensionPriceDto> prices = await this.repositoryServices.GetAllPrices();
             int distance = this.businessLogic.CalculateDistanceInKm(filterRequest);

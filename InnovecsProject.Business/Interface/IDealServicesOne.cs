@@ -6,6 +6,6 @@ namespace InnovecsProject.Business.Interface
 {
     public interface IDealServicesOne
     {
-        Task<ResponseDto<OutApiOneDto>> GettDeal(FilterApiOneDto filterRequest);
+        Task<ResponseDto<OutApiOneDto>> CalculatePrice(FilterApiOneDto filterRequest);
     }
 }

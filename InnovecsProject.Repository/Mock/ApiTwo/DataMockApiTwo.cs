@@ -10,7 +10,9 @@ namespace InnovecsProject.Repository.Mock.ApiTwo
             List<DimensionPriceDto> prices = new List<DimensionPriceDto>();
             for (int iteration = 1; iteration < 100; iteration++)
             {
-                prices.Add(new DimensionPriceDto() { High = iteration, Width = iteration, Length = iteration, Price = iteration * 5, Distance = iteration });
+                var item = new DimensionPriceDto() { High = iteration, Width = iteration, Length = iteration, Distance = iteration };
+                item.Price = item.Volumen * 6;
+                prices.Add(item);
             }
             return prices;
         }

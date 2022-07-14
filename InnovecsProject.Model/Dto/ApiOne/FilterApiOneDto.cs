@@ -9,6 +9,11 @@ namespace InnovecsProject.Model.Dto.ApiOne
         public string WarehouseAddress { get; set; }
         public IEnumerable<DimensionDto> PackageDimensions { get; set; }
 
+        public FilterApiOneDto()
+        {
+
+        }
+
         public FilterApiOneDto(FilterBestDealDto filterRequest)
         {
 
