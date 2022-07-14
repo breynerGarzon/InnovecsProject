@@ -11,7 +11,7 @@ using Microsoft.Extensions.Options;
 
 namespace InnovecsProject.Business.Implements
 {
-    public class BestDealServices : IBeastDealServices
+    public class BestDealServices : IBestDealServices
     {
         private readonly IDealServicesOne dealServicesOne;
         private readonly IDealServicesTwo dealServicesTwo;

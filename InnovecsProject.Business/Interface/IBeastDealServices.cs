@@ -4,7 +4,7 @@ using InnovecsProject.Model.System;
 
 namespace InnovecsProject.Business.Interface
 {
-    public interface IBeastDealServices
+    public interface IBestDealServices
     {
         Task<ResponseDto<string>> GetBestDeal(FilterBestDealDto filterRequest);
     }

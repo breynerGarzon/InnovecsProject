@@ -9,9 +9,9 @@ namespace InnovecsProject.Api.Controllers
     [Route("api/[controller]")]
     public class BestDealOneController : ControllerBase
     {
-        private readonly IBeastDealServices bestServicesDeal;
+        private readonly IBestDealServices bestServicesDeal;
 
-        public BestDealOneController(IBeastDealServices bestServicesDeal)
+        public BestDealOneController(IBestDealServices bestServicesDeal)
         {
             this.bestServicesDeal = bestServicesDeal;
         }

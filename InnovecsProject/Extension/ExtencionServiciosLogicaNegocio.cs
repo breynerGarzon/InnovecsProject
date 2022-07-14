@@ -11,7 +11,7 @@ namespace Api.Extension
             services.AddTransient<IDealServicesOne, DealServicesOne>();
             services.AddTransient<IDealServicesTwo, DealServicesTwo>();
             services.AddTransient<IDealServicesThree, DealServicesThree>();
-            services.AddTransient<IBeastDealServices, BestDealServices>();
+            services.AddTransient<IBestDealServices, BestDealServices>();
         }
     }
 }
