@@ -24,16 +24,17 @@ namespace InnovecsProject.Business.Implements
             this.repositoryServices = repositoryServices;
         }
 
-        public async Task<ResponseDto<OutApiThreeDto>> GettDeal(string filterRequest)
+        public async Task<ResponseDto<OutApiThreeDto>> GettDeal(FilterApiThreeDto filterRequest)
         {
             IEnumerable<DimensionPriceDto> prices = await this.repositoryServices.GetAllPrices();
-            FilterApiThreeDto filterData = this.businessLogic.DeserializeXml(filterRequest);
-            int distance = this.businessLogic.CalculateDistanceInKm(filterData);
-            int total = this.businessLogic.CalculateTotalPrice(filterData, prices);
+            int distance = this.businessLogic.CalculateDistanceInKm(filterRequest);
+            int total = this.businessLogic.CalculateTotalPrice(filterRequest, prices);
 
             return Validation.IsNotZero(total) ?
                 ResponseServices.Successfull(new OutApiThreeDto() { Quote = total }) :
                 ResponseServices.BadRequest<OutApiThreeDto>(Messages.ErrorWithDimentions);
         }
+
+
     }
 }

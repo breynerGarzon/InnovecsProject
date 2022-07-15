@@ -16,9 +16,9 @@ namespace InnovecsProject.Api.Controllers
             this.bestServicesDeal = bestServicesDeal;
         }
 
-        [HttpGet]
+        [HttpPost]
         [Route("best-deal")]
-        public async Task<IActionResult> BestDeal([FromQuery] FilterBestDealDto filterRequest)
+        public async Task<IActionResult> BestDeal([FromBody] FilterBestDealDto filterRequest)
         {
             return Ok(await this.bestServicesDeal.GetBestDeal(filterRequest));
         }

@@ -1,9 +1,13 @@
+using System.Collections.Generic;
+using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
 using InnovecsProject.Business.Interface;
 using InnovecsProject.Business.Util;
+using InnovecsProject.Business.Util.Messages;
 using InnovecsProject.Business.Util.Validation;
 using InnovecsProject.Model.Dto.ApiOne;
+using InnovecsProject.Model.Dto.ApiThree;
 using InnovecsProject.Model.Dto.ApiTwo;
 using InnovecsProject.Model.Dto.BestDeal;
 using InnovecsProject.Model.System;
@@ -35,33 +39,49 @@ namespace InnovecsProject.Business.Implements
 
         public async Task<ResponseDto<string>> GetBestDeal(FilterBestDealDto filterRequest)
         {
-            Task<string> responseOne = ConsumeApi.Consume(this.clientFactory, $"{this.configuration.One}{UrlSetUp.GetApiOneUrl(filterRequest)}", HttpMethod.Get);
-            Task<string> responseTwo = ConsumeApi.Consume(this.clientFactory, $"{this.configuration.Two}{UrlSetUp.GetApiTwoUrls(filterRequest)}", HttpMethod.Get);
-            Task<string> responseThree = ConsumeApi.Consume(this.clientFactory, $"{this.configuration.Three}{UrlSetUp.GetApiThreeUrls(filterRequest)}", HttpMethod.Get);
+            Task<string> responseOne = ConsumeApi.Consume<FilterApiOneDto>(this.clientFactory, $"{this.configuration.One}", HttpMethod.Post, new FilterApiOneDto(filterRequest));
+            Task<string> responseTwo = ConsumeApi.Consume<FilterApiTwoDto>(this.clientFactory, $"{this.configuration.Two}", HttpMethod.Post, new FilterApiTwoDto(filterRequest));
+            Task<string> responseThree = ConsumeApi.Consume<FilterApiThreeDto>(this.clientFactory, $"{this.configuration.Three}", HttpMethod.Post, new FilterApiThreeDto(filterRequest));
             Task.WaitAll(responseOne, responseTwo, responseThree);
 
             ResponseDto<OutApiOneDto> resultOne = ConsumeApi.ConsumeDeserialize<ResponseDto<OutApiOneDto>>(responseOne.Result);
             ResponseDto<OutApiTwoDto> resultTwo = ConsumeApi.ConsumeDeserialize<ResponseDto<OutApiTwoDto>>(responseTwo.Result);
             ResponseDto<OutApiThreeDto> resultThree = ConsumeApi.ConsumeDeserialize<ResponseDto<OutApiThreeDto>>(responseThree.Result);
 
-            int costOne = resultOne.Data.Total;
-            int costTwo = resultTwo.Data.Amount;
-            int costThree = resultThree.Data.Quote;
+            int costOne = this.QuerySuccesfull(resultOne) ? resultOne.Data.Total : 0;
+            int costTwo = this.QuerySuccesfull(resultTwo) ? resultTwo.Data.Amount : 0;
+            int costThree = this.QuerySuccesfull(resultThree) ? resultThree.Data.Quote : 0;
 
-            if (costOne < costTwo)
-            {
-                if (costOne < costThree)
-                    return ResponseServices.Successfull($"Best deal Api1: {costOne}");
-                else
-                    return ResponseServices.Successfull($"Best deal Api3: {costThree}");
-            }
-            else
-            {
-                if (costTwo < costThree)
-                    return ResponseServices.Successfull($"Best deal Api2: {costTwo}");
-                else
-                    return ResponseServices.Successfull($"Best deal Api3: {costThree}");
-            }
+            List<DealDto> pricesByApi = new List<DealDto>();
+            pricesByApi.Add(new DealDto() { Message = $"Best deal Api1 with price: {costOne}", Price = costOne });
+            pricesByApi.Add(new DealDto() { Message = $"Best deal Api2 with price: {costTwo}", Price = costTwo });
+            pricesByApi.Add(new DealDto() { Message = $"Best deal Api3 with price: {costThree}", Price = costThree });
+
+            DealDto bestDeal = pricesByApi.OrderBy(item => item.Price).Where(item => item.Price > 0).FirstOrDefault();
+
+            return Validation.IsNotNull(bestDeal) ?
+                   ResponseServices.Successfull(bestDeal.Message) :
+                   ResponseServices.BadRequest<string>(Messages.ErrorWithDimentions);
+
+            //if (costOne < costTwo && costOne > 0)
+            //{
+            //    if (costOne < costThree && costOne > 0)
+            //        return ResponseServices.Successfull($"Best deal Api1: {costOne}");
+            //    else
+            //        return ResponseServices.Successfull($"Best deal Api3: {costThree}");
+            //}
+            //else
+            //{
+            //    if (costTwo < costThree && costTwo > 0)
+            //        return ResponseServices.Successfull($"Best deal Api2: {costTwo}");
+            //    else
+            //        return ResponseServices.Successfull($"Best deal Api3: {costThree}");
+            //}
+        }
+
+        public bool QuerySuccesfull<T>(ResponseDto<T> response)
+        {
+            return response.StatusCode == System.Net.HttpStatusCode.OK;
         }
     }
 }

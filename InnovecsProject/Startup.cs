@@ -28,8 +28,8 @@ namespace InnovecsProject
             services.ResolveDependencyLogicalBusiness();
             services.ResolveDependencyRepository();
             services.ResolveSwagger();
-            services.AddControllers();
-        }
+            services.AddControllers().AddXmlDataContractSerializerFormatters();
+        } 
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

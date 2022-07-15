@@ -19,6 +19,7 @@ namespace InnovecsProject.Business.BusinessLogic.ApiOne.Implements
         {
             int total = 0;
             int totalVolumen = filterRequest.PackageDimensions.Sum(package => package.Volumen);
+            DimensionPriceDto lastVolumen;
 
             prices.ToList().ForEach(price =>
             {
@@ -29,15 +30,11 @@ namespace InnovecsProject.Business.BusinessLogic.ApiOne.Implements
 
             if (!Validation.IsNotZero(total) && Validation.IsNotZero(totalVolumen))
             {
-                total = prices.OrderByDescending(price => price.Volumen).FirstOrDefault(price => price.Volumen <= totalVolumen).Price;
+                lastVolumen = prices.OrderByDescending(price => price.Volumen).FirstOrDefault(price => price.Volumen <= totalVolumen);
+                decimal differents = (decimal)(1 - ((decimal)lastVolumen.Volumen / (decimal)totalVolumen));
+                total = differents < 0.1m ? lastVolumen.Price : 0; 
             }
 
-            // filterRequest.PackageDimensions.ToList().ForEach(package =>
-            // {
-            //     var price = prices.FirstOrDefault(price => price.Volumen == package.Volumen);
-            //     if (Validation.IsNotNull(price))
-            //         total += price.Price;
-            // });
             return total;
         }
     }

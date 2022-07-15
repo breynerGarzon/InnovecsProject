@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using InnovecsProject.Model.Dto.BestDeal;
 
 namespace InnovecsProject.Model.Dto.ApiTwo
@@ -16,7 +17,9 @@ namespace InnovecsProject.Model.Dto.ApiTwo
 
         public FilterApiTwoDto(FilterBestDealDto filterRequest)
         {
-
+            this.Consignee = filterRequest.Destination;
+            this.Consignor = filterRequest.Source;
+            this.Cartons = filterRequest.Boxs.Select(item => new CartonDto() { High = item.High, Length = item.Length, Width = item.Width });
         }
     }
 }

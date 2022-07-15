@@ -8,10 +8,11 @@ namespace Api.Extension
     {
         public static void ResolveDependencyServicesLogicalBusiness(this IServiceCollection services)
         {
+            services.AddHttpClient<IBestDealServices, BestDealServices>();
+            services.AddTransient<IBestDealServices, BestDealServices>();
             services.AddTransient<IDealServicesOne, DealServicesOne>();
             services.AddTransient<IDealServicesTwo, DealServicesTwo>();
             services.AddTransient<IDealServicesThree, DealServicesThree>();
-            services.AddTransient<IBestDealServices, BestDealServices>();
         }
     }
 }

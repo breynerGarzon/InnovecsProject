@@ -21,14 +21,26 @@ namespace InnovecsProject.Business.BusinessLogic.ApiThree.Implements
         public int CalculateTotalPrice(FilterApiThreeDto filterRequest, IEnumerable<DimensionPriceDto> prices)
         {
             int total = 0;
-            filterRequest.Packages.ToList().ForEach(package =>
+            int totalVolumen = filterRequest.Packages.Sum(package => package.Volumen);
+            DimensionPriceDto lastVolumen;
+            prices.ToList().ForEach(price =>
             {
-                var price = prices.FirstOrDefault(price => price.Volumen == package.Volumen);
-                if (Validation.IsNotNull(price))
+                bool isSameVolumnen = price.Volumen == totalVolumen;
+                if (isSameVolumnen)
                     total += price.Price;
             });
+
+            if (!Validation.IsNotZero(total) && Validation.IsNotZero(totalVolumen))
+            {
+                lastVolumen = prices.OrderByDescending(price => price.Volumen).FirstOrDefault(price => price.Volumen <= totalVolumen);
+                decimal differents = (decimal)(1 - ((decimal)lastVolumen.Volumen / (decimal)totalVolumen));
+                total = differents < 0.1m ? lastVolumen.Price : 0; 
+            }
+
             return total;
         }
+
+
 
         public FilterApiThreeDto DeserializeXml(string xmlStruct)
         {

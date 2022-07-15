@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using InnovecsProject.Model.Dto.BestDeal;
 
 namespace InnovecsProject.Model.Dto.ApiOne
@@ -16,7 +17,9 @@ namespace InnovecsProject.Model.Dto.ApiOne
 
         public FilterApiOneDto(FilterBestDealDto filterRequest)
         {
-
+            this.WarehouseAddress = filterRequest.Destination;
+            this.ContactAdrress = filterRequest.Source;
+            this.PackageDimensions = filterRequest.Boxs.Select(item => new DimensionDto() { High = item.High, Length = item.Length, Width = item.Width });
         }
     }
 }
