@@ -62,21 +62,6 @@ namespace InnovecsProject.Business.Implements
             return Validation.IsNotNull(bestDeal) ?
                    ResponseServices.Successfull(bestDeal.Message) :
                    ResponseServices.BadRequest<string>(Messages.ErrorWithDimentions);
-
-            //if (costOne < costTwo && costOne > 0)
-            //{
-            //    if (costOne < costThree && costOne > 0)
-            //        return ResponseServices.Successfull($"Best deal Api1: {costOne}");
-            //    else
-            //        return ResponseServices.Successfull($"Best deal Api3: {costThree}");
-            //}
-            //else
-            //{
-            //    if (costTwo < costThree && costTwo > 0)
-            //        return ResponseServices.Successfull($"Best deal Api2: {costTwo}");
-            //    else
-            //        return ResponseServices.Successfull($"Best deal Api3: {costThree}");
-            //}
         }
 
         public bool QuerySuccesfull<T>(ResponseDto<T> response)
